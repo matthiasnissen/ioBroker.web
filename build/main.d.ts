@@ -13,6 +13,10 @@ export declare class WebAdapter extends Adapter {
     private webServer;
     private store;
     private secret;
+    private get sessionCookieName();
+    private get sessionCookieNames();
+    private get accessTokenCookieName();
+    private get accessTokenCookieNames();
     private socketUrl;
     private readonly cache;
     /** Namespaces whose files are in {@link cache} and are therefore watched for changes */

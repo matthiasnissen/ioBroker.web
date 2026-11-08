@@ -41,7 +41,10 @@ describe(`Test WEB(SSL)`, () => {
         setup.adapterStarted = false;
 
         setup.setupController(async () => {
-            const config = await setup.getAdapterConfig();
+            const config = await setup.getAdapterConfig(0, 'iobroker.web');
+            if (!config?.common) {
+                throw new Error('Cannot read adapter instance config');
+            }
             // enable adapter
             config.common.enabled = true;
             config.common.loglevel = 'debug';
@@ -58,7 +61,7 @@ describe(`Test WEB(SSL)`, () => {
             config.native.certPublic = config.native.secure ? 'defaultPublic' : '';
             config.native.certPrivate = config.native.secure ? 'defaultPrivate' : '';
 
-            await setup.setAdapterConfig(config.common, config.native);
+            await setup.setAdapterConfig(config.common, config.native, 0, 'iobroker.web');
 
             setup.startController(true, null, null, (_objects, _states) => {
                 objects = _objects;
